@@ -5,7 +5,7 @@ let listaCarros = [
         "descricao": "O Yuan Pro é o novo SUV compacto da BYD, elétrico, e chega em versão única com bateria de 45 kWh de capacidade. Seu motor elétrico fica no eixo dianteiro e gera 177 cv e 29,6 kgfm, e é alimentado por uma bateria de 45,1 kWh, que permite até 250 km de autonomia. Sua transmissão é automática de 1 velocidade. O Yuan Pro 2025 mede 4310 mm de comprimento, 1830 mm de largura, 1675 mm de altura e 2620 mm de entre-eixos, com porta-malas de 265 litros."
     },
     {
-        "nome": "Chevrolet Tracker",
+        "nome": "CHEVROLET TRACKER",
         "img": "img/CHEVROLET TRACKER.jpeg",
         "descricao": "Novo Tracker Premier 1.2 2025, Comprimento: 4.270 mm, Altura: 1.624 mm, Largura: 1.791 mm, Entre-eixos: 2.570 mm, Motorização: 1.2 Turbo, Potência (Gasolina): 116 cv, Torque (Gasolina): 16,3 kgf.m, Aceleração 0-100 km/h: 10,9 s, Consumo Cidade (Gasolina): 11,2 km/l"
     },
@@ -22,11 +22,48 @@ let listaCarros = [
     {
         "nome": "TOYOTA SW4",
         "img": "img/TOYOTA SW4.jpeg",
-        "descricao": " SRX Platinum 7 lugares, Motor:2.8L Diesel D-4D 16V Turbo, Potência:204/3.400 (cv/rpm), Torque:50,9 / 2.800 (kgf.n / rpm), Tração 4X4, Automática de 6 velocidades sequencial com paddle shift"
+        "descricao": "SRX Platinum 7 lugares, Motor:2.8L Diesel D-4D 16V Turbo, Potência:204/3.400 (cv/rpm), Torque:50,9 / 2.800 (kgf.n / rpm), Tração 4X4, Automática de 6 velocidades sequencial com paddle shift"
     },
     {
         "nome": "VOLVO XC40",
         "img": "img/VOLVO XC40.jpeg",
         "descricao": "Motor: Twin Engine, Aceleração 0 - 100 km/h: 4,8 s, Potência: 413 cv, Torque máximo: 670 Nm, Autonomia: 500 km - WLTP, Capacidade da bateria: 78 kWh, Velocidade máxima: 180 km/h, Tração: Integral, Direção: Elétrica, Pneus: 235/45 R20,Capacidade do Porta-malas: 452 litros."
-    },
+    }
 ]
+
+listaCarros.map((carro, posicao) => {
+    let cardCarro = document.getElementById("cards")
+    cardCarro.innerHTML += `
+                <div class="col-md-4">
+                <div class="card m-3">
+                    <img src="${carro.img}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">${carro.nome}</h5>
+                      <a href="#" class="btn btn-secondary" onclick="zoomImg('${posicao}')"><i class="bi bi-zoom-in"></i></a>
+                    </div>
+                </div>
+                </div>
+    `
+    console.log(posicao)
+})
+
+function zoomImg(posicao){
+    let carroSelecionado = listaCarros[posicao];
+    document.getElementById("nomeCarro").innerHTML = carroSelecionado.nome;
+    document.getElementById("descricaoCarro").innerHTML = carroSelecionado.descricao;
+    document.getElementById("imgModal").src = carroSelecionado.img;
+
+    new bootstrap.Modal('#zoomImg').show();
+
+}
+
+function alterarTemaSite(){
+    let tema = document.querySelector("html").getAttribute("data-bs-theme");
+    if(tema==="dark"){
+        document.querySelector("html").setAttribute("data-bs-theme", "light");
+        document.querySelector("#alterarTemaSite").innerHTML = `<i class="bi bi-moon-fill"></i>`
+    }else{
+        document.querySelector("html").setAttribute("data-bs-theme", "dark");
+        document.querySelector("#alterarTemaSite").innerHTML = `<i class="bi bi-sun-fill" >`
+    }
+}
